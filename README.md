@@ -17,4 +17,4 @@ The tool also checks for the presence of Domain or Enterprise Admins tickets or 
 
 Run as follows:
 
-`iex(new-object net.webclient).downloadstring('http://c.soc.ja.net/JMove.ps1')`
+`iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/JMove/main/JMove.ps1')`
