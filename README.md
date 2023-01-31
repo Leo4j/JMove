@@ -51,6 +51,10 @@ Import-ActiveDirectory
 
 samratashok - https://raw.githubusercontent.com/samratashok/ADModule/master/Import-ActiveDirectory.ps1
 
+Find-WMILocalAdminAccess
+
+samratashok - https://github.com/samratashok/nishang
+
 SharpSecDump
 
 G0ldenGunSec - https://github.com/G0ldenGunSec/SharpSecDump
