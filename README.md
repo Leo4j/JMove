@@ -3,7 +3,7 @@ Lateral Movement within Windows environments
 
 JMove is a PowerShell tool that is designed to aid in lateral movement within a Windows environment. 
 
-This tool enables you to use new credentials, such as usernames and passwords or hashes or tickets, to perform pass-the-password, pass-the-hash, or pass-the-ticket actions. 
+This tool enables you to use new credentials, such as usernames and passwords or hashes or tickets, to perform pass-the-password, pass-the-hash, overpass-the-hash, or pass-the-ticket actions. 
 
 The tool can handle both domain or local credentials, providing a versatile solution for network penetration testing. 
 
