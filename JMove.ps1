@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 1. Search for local admin access on machines in a domain or local network
 2. Check for active sessions on those machines where you have admin access
