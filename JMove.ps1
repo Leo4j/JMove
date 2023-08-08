@@ -1165,7 +1165,7 @@ if($UserName){
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
 				
 				Start-Sleep 1
 				
@@ -1179,7 +1179,7 @@ if($UserName){
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
 				
 				Start-Sleep 1
 				
@@ -1187,7 +1187,7 @@ if($UserName){
 				
 				$processCommand2 = "powershell.exe -Command $Command2"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 			
 			}
 			
@@ -1427,11 +1427,11 @@ else{
 
 }
 
-Write-Host "#######################"
+Write-Host "##################"
 Write-Host "#" -ForegroundColor Red -NoNewline;
-Write-Host " Admins and Sessions " -NoNewline;
+Write-Host " Admin Sessions " -NoNewline;
 Write-Host "#" -ForegroundColor Red;
-Write-Host "#######################"
+Write-Host "##################"
 Write-Host ""
 
 ##### Show Domain and Enterprise Admins
@@ -1450,13 +1450,6 @@ $EnterpriseAdmins = (Get-ADGroupMember -Identity "Enterprise Admins" -Recursive 
 
 $AllAdminGroups = (Get-ADGroup -Filter 'Name -like "*admin*"' | select-object -ExpandProperty Name)
 
-Write-Host "Domain Admins: (Recursive)" -ForegroundColor Yellow;
-$DomainAdmins
-
-Write-Host ""
-Write-Host "Enterprise Admins: (Recursive)" -ForegroundColor Yellow;
-$EnterpriseAdmins
-
 ##### Merge content of Domain and Enterprise admins into one variable
 
 $DomainAdminsArray = $DomainAdmins -split "\r?\n"
@@ -1469,7 +1462,7 @@ $AllAdminUsersString = $AllAdminUsers -join "`n"
 $AllAdminUsers = ($AllAdminUsers | Sort-Object | Get-Unique)
 
 ##### Check Against Sessions
-Write-Host ""
+
 Write-Host "Domain and Enterprise Admins Sessions:" -ForegroundColor Yellow
 
 $matchFound = $false
@@ -1634,7 +1627,7 @@ if($Username){
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
 				
 				Start-Sleep 1
 				
@@ -1642,7 +1635,7 @@ if($Username){
 				
 				$processCommand2 = "powershell.exe -Command $Command2"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 				
 				Start-Sleep 2
 				
@@ -1656,7 +1649,7 @@ if($Username){
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command2"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
 				
 				Start-Sleep 1
 				
@@ -1664,7 +1657,7 @@ if($Username){
 				
 				$processCommand2 = "powershell.exe -Command $Command2"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand2 > $null
 				
 				Start-Sleep 2
 				
@@ -1674,7 +1667,7 @@ if($Username){
 				
 				$processCommand = "powershell.exe -ep bypass -enc $base64command"
 				
-				Invoke-WmiMethod -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
+				Invoke-WmiMethod -Credential $cred -ComputerName $_ -Class Win32_Process -Name Create -ArgumentList $processCommand > $null
 			
 			}
 			
